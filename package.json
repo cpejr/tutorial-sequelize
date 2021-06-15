@@ -1,0 +1,14 @@
+{
+  "name": "tutorial-sequelize",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:cpejr/tutorial-sequelize.git",
+  "author": "gustadsg@outlook.com.br <gustadsg@outlook.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0"
+  }
+}
