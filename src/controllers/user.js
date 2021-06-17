@@ -1,7 +1,7 @@
 const { User } = require("../models");
 
 module.exports = {
-  create(req, res) {
+  async create(req, res) {
     const { firstName, lastName, email } = req.body;
 
     try {
@@ -13,7 +13,7 @@ module.exports = {
     }
   },
 
-  read(req, res) {
+  async read(req, res) {
     try {
       const users = user.findAll();
 
@@ -24,7 +24,7 @@ module.exports = {
     }
   },
 
-  update(req, res) {
+  async update(req, res) {
     const id = req.params;
     const { firstName, lastName } = req.body;
 
@@ -44,7 +44,7 @@ module.exports = {
     }
   },
 
-  delete(req, res) {
+  async delete(req, res) {
     const id = req.params;
 
     try {
