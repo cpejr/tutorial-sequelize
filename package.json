@@ -5,6 +5,10 @@
   "repository": "git@github.com:cpejr/tutorial-sequelize.git",
   "author": "gustadsg@outlook.com.br <gustadsg@outlook.com.br>",
   "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
