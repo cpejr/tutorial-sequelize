@@ -8,49 +8,49 @@ module.exports = {
       await User.create({ firstName, lastName, email });
       return res.status(201).json();
     } catch (error) {
-      console.log(error);
+      console.warn(error);
       return res.status(500).json();
     }
   },
 
   async read(req, res) {
     try {
-      const users = user.findAll();
+      const users = await User.findAll();
 
-      return req.status(200).json({ users });
+      return res.status(200).json({ users });
     } catch (error) {
-      console.log(error);
+      console.warn(error);
       return res.status(500).json();
     }
   },
 
   async update(req, res) {
-    const id = req.params;
+    const { id } = req.params;
     const { firstName, lastName } = req.body;
 
     try {
-      const user = await User.findOne(id);
+      const user = await User.update(
+        { firstName, lastName },
+        { where: { id } }
+      );
 
       if (!user) return req.status(404);
 
-      user.firstName = firstName;
-      user.lastName = lastName;
-
-      await user.save();
-
       return res.status(204).json();
     } catch (error) {
+      console.warn(error);
       return res.status(500).json();
     }
   },
 
   async delete(req, res) {
-    const id = req.params;
+    const { id } = req.params;
 
     try {
-      await User.delete(id);
+      await User.destroy({ where: { id } });
       return res.status(204).json();
     } catch (error) {
+      console.warn(error);
       return res.status(500).josn();
     }
   },
