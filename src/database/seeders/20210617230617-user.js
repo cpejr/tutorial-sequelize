@@ -22,7 +22,7 @@ module.exports = {
       {
         firstName: "João",
         lastName: "Rosmaninho",
-        email: "joaoRosmaninho@cpejr.com.br",
+        email: "joaorosmaninho@cpejr.com.br",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
