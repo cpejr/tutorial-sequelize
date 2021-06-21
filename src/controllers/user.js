@@ -2,10 +2,10 @@ const { User } = require("../models");
 
 module.exports = {
   async create(req, res) {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     try {
-      await User.create({ firstName, lastName, email });
+      await User.create({ firstName, lastName, email, password });
       return res.status(201).json();
     } catch (error) {
       console.warn(error);
@@ -26,11 +26,11 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, password } = req.body;
 
     try {
       const user = await User.update(
-        { firstName, lastName },
+        { firstName, lastName, password },
         { where: { id } }
       );
 
