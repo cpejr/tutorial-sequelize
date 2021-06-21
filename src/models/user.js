@@ -1,6 +1,17 @@
 "use strict";
 const { Model } = require("sequelize");
-const { argon2id } = require("argon2");
+const bcrypt = require("bcrypt");
+
+function hashPassword(user) {
+  const saltRounds = parseInt(process.env.SALT_ROUNDS);
+  try {
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(user.password, salt);
+    user.password = hash;
+  } catch (error) {
+    throw Error(error);
+  }
+}
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -28,13 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.addHook("beforeSave", "hashPassword", (user, options) => {
-    try {
-      const hash = await argon2id.hash(user.password);
-      user.password = hash;
-    } catch (error) {
-      throw Error("Error trying to encrypt password");
-    }
-  });
+  // Hooks
+  User.addHook("beforeCreate", hashPassword);
+  User.addHook("beforeBulkUpdate", (user) => hashPassword(user.attributes));
+
   return User;
 };
